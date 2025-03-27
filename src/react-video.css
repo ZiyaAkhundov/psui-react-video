@@ -1,0 +1,226 @@
+@import "tailwindcss";
+/* Custom styles converted with Tailwind’s @apply */
+
+.ps-video-container {
+  @apply relative w-[90%] max-w-[1000px] flex justify-center mx-auto bg-black h-full;
+}
+
+/* Adjustments for theater and full-screen modes */
+.ps-video-container.theater,
+.ps-video-container.full-screen {
+  @apply w-full;
+  /* For properties without a direct Tailwind equivalent, leave them as custom if needed */
+}
+.ps-video-container.theater {
+  @apply max-h-[90vh];
+}
+.ps-video-container.full-screen {
+  @apply max-h-screen;
+}
+
+video {
+  @apply w-full;
+}
+
+.ps-video-controls-container {
+  @apply absolute bottom-0 left-0 right-0 text-white z-10 opacity-0 transition-opacity duration-150 ease-in-out;
+}
+.ps-video-controls-container::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
+  width: 100%;
+  aspect-ratio: 6/1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Show controls on hover/focus */
+.ps-video-container:hover .ps-video-controls-container,
+.ps-video-container:focus-within .ps-video-controls-container,
+.ps-video-container.paused .ps-video-controls-container {
+  @apply opacity-100;
+}
+
+.ps-video-controls-container .controls {
+  @apply flex gap-2 p-1 items-center;
+}
+
+.ps-video-controls-container .controls button {
+  @apply bg-transparent border-0 text-inherit p-0 h-8 w-8 text-lg cursor-pointer opacity-85 transition-opacity duration-150 ease-in-out;
+}
+.ps-video-controls-container .controls button:hover {
+  @apply opacity-100;
+}
+
+/* Icon visibility based on state */
+.ps-video-container.paused .pause-icon {
+  @apply hidden;
+}
+.ps-video-container:not(.paused) .play-icon {
+  @apply hidden;
+}
+
+.ps-video-container.theater .tall {
+  @apply hidden;
+}
+.ps-video-container:not(.theater) .wide {
+  @apply hidden;
+}
+
+.ps-video-container.full-screen .open {
+  @apply hidden;
+}
+.ps-video-container:not(.full-screen) .close {
+  @apply hidden;
+}
+
+.ps-volume-high-icon,
+.ps-volume-low-icon,
+.ps-volume-muted-icon {
+  @apply hidden;
+}
+.ps-video-container[data-volume-level="high"] .ps-volume-high-icon {
+  @apply block;
+}
+.ps-video-container[data-volume-level="low"] .ps-volume-low-icon {
+  @apply block;
+}
+.ps-video-container[data-volume-level="muted"] .ps-volume-muted-icon {
+  @apply block;
+}
+
+.ps-volume-container {
+  @apply flex items-center;
+}
+
+.ps-volume-slider {
+  @apply w-0 origin-left scale-x-0 transition-all duration-150;
+  /* Custom property */
+  accent-color: #fff;
+}
+.ps-volume-container:hover .ps-volume-slider,
+.ps-volume-slider:focus-within {
+  @apply w-[100px] scale-x-100;
+}
+
+.ps-duration-container {
+  @apply flex items-center gap-1 flex-grow;
+}
+
+.ps-video-controls-container .controls button.wide-btn {
+  @apply w-12;
+}
+
+.ps-timeline-container {
+  @apply h-2 mx-2 cursor-pointer flex items-center;
+}
+.ps-timeline {
+  @apply relative bg-gray-500/50 h-1 w-full;
+}
+.ps-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--preview-position) * 100%);
+  background-color: rgb(150,150,150);
+  display: none;
+  transition: width 0.3s ease;
+}
+.ps-timeline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--progress-position) * 100%);
+  background-color: red;
+  transition: right 0.3s ease-in-out;
+}
+.ps-timeline .thumb-indicator {
+  --scale: 0;
+  position: absolute;
+  transform: translateX(-50%) scale(var(--scale));
+  height: 200%;
+  top: -50%;
+  left: calc(var(--progress-position) * 100%);
+  background-color: red;
+  border-radius: 50%;
+  transition: transform 150ms ease-in-out;
+  aspect-ratio: 1/1;
+}
+.ps-timeline .preview-img {
+  position: absolute;
+  height: 80px;
+  aspect-ratio: 16/9;
+  top: -1rem;
+  transform: translate(-50%, -100%);
+  left: calc(var(--preview-position) * 100%);
+  border-radius: 0.25rem;
+  border: 2px solid white;
+  display: none;
+}
+.thumbnail-container {
+  @apply absolute bottom-[60px] w-28 h-24 transform -translate-x-1/2 overflow-hidden border-2 border-white rounded-2xl pointer-events-none z-10;
+}
+.thumbnail-img {
+  @apply w-full h-full object-cover;
+}
+
+.ps-video-container.scrubbing .preview-img,
+.ps-timeline-container:hover .preview-img {
+  @apply block;
+}
+.ps-video-container.scrubbing .ps-timeline::before,
+.ps-timeline-container:hover .ps-timeline::before {
+  display: block;
+  transition: all 0.3s ease;
+}
+.ps-video-container.scrubbing .thumb-indicator,
+.ps-timeline-container:hover .thumb-indicator {
+  --scale: 1;
+}
+.ps-video-container.scrubbing .ps-timeline,
+.ps-timeline-container:hover .ps-timeline {
+  @apply h-full;
+}
+
+/* Loader styles */
+.loader {
+  @apply hidden absolute top-1/2;
+  width: 4.35em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+.loader circle {
+  fill: none;
+  stroke: hsl(214, 97%, 59%);
+  stroke-width: 2;
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90,200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
