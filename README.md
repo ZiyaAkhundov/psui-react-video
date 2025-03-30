@@ -2,7 +2,7 @@
 
 A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes.
 
-![React Video Player](https://via.placeholder.com/800x450.png?text=React+Video+Player)
+![React Video Player](./examples/video.png)
 
 ## Features
 
@@ -251,4 +251,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-[MIT](LICENSE) © React Video Team
+[MIT](LICENSE) © Ziya Akhundov
