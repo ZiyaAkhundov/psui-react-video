@@ -1,6 +1,6 @@
 {
-  "name": "react-video",
-  "version": "1.0.0",
+  "name": "@psui/react-video",
+  "version": "1.0.1",
   "description": "A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes",
   "type": "module",
   "files": [
@@ -48,21 +48,24 @@
     "react",
     "video",
     "player",
-    "video-player",
+    "video",
     "react-component",
     "thumbnails",
     "theater-mode",
     "fullscreen",
     "picture-in-picture"
   ],
-  "author": "React Video Team",
+  "author": "Ziya Akhundov",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ZiyaAkhundov/react-video.git"
+    "url": "git+https://github.com/ZiyaAkhundov/psui-react-video.git"
   },
   "bugs": {
-    "url": "https://github.com/ZiyaAkhundov/react-video/issues"
+    "url": "https://github.com/ZiyaAkhundov/psui-react-video/issues"
   },
-  "homepage": "https://github.com/ZiyaAkhundov/react-video"
+  "homepage": "https://github.com/ZiyaAkhundov/psui-react-video#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }

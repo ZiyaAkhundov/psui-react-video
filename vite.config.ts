@@ -1,38 +1,35 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
-import tailwindcss from '@tailwindcss/vite'
 import dts from 'vite-plugin-dts'
+import { resolve } from 'path'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(),
-    cssInjectedByJsPlugin(),
     dts({
-      tsconfigPath: 'tsconfig.json',
-      outDir: 'dist/types', 
-      insertTypesEntry: true,
-      copyDtsFiles: true
-    })
+      include: ['src'],
+      exclude: ['src/**/*.test.tsx', 'src/**/*.stories.tsx'],
+      rollupTypes: true,
+    }),
+    cssInjectedByJsPlugin(),
   ],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'VideoPlayer',
-      fileName: 'react-video',
-      formats: ['es', 'umd']
+      name: 'ReactVideoPlayer',
+      fileName: (format) => `react-video-player.${format === 'es' ? 'js' : 'umd.cjs'}`,
+      formats: ['es', 'umd'],
     },
-    cssCodeSplit: false,
     rollupOptions: {
       external: ['react', 'react-dom'],
       output: {
         globals: {
-          react: 'React'
-        }
-      }
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
     },
-    assetsInlineLimit: 0
+    sourcemap: true,
   }
 })

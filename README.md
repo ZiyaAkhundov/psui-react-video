@@ -23,19 +23,18 @@ A modern, responsive React video player component with customizable controls, th
 ## Installation
 
 ```bash
-npm install react-video-player
+npm install @psui/react-video
 # or
-yarn add react-video-player
+yarn add @psui/react-video
 # or
-pnpm add react-video-player
+pnpm add @psui/react-video
 ```
 
 ## Quick Start
 
 ```jsx
 import React from 'react';
-import { VideoPlayer } from 'react-video-player';
-import 'react-video-player/style.css';
+import { VideoPlayer } from '@psui/react-video';
 
 function App() {
   return (
@@ -79,7 +78,7 @@ The library exports several hooks that allow you to control the video player pro
 Access the video player's state:
 
 ```jsx
-import { useVideoStateContext } from 'react-video-player';
+import { useVideoStateContext } from '@psui/react-video';
 
 function VideoInfo() {
   const { isPaused, currentTime, totalTime, playbackSpeed } = useVideoStateContext();
@@ -100,7 +99,7 @@ function VideoInfo() {
 Control the video player programmatically:
 
 ```jsx
-import { useVideoControlsContext } from 'react-video-player';
+import { useVideoControlsContext } from '@psui/react-video';
 
 function CustomControls() {
   const { togglePlay, toggleMute, skip, changePlaybackSpeed } = useVideoControlsContext();
@@ -190,7 +189,7 @@ The component comes with a default styling that you can customize by overriding 
 
 ```jsx
 import React from 'react';
-import { VideoPlayer, useVideoControls } from 'react-video-player';
+import { VideoPlayer, useVideoControls } from '@psui/react-video';
 
 function App() {
   return (
@@ -221,7 +220,7 @@ export default App;
 
 ```jsx
 import React from 'react';
-import { VideoPlayer, VideoProvider } from 'react-video-player';
+import { VideoPlayer, VideoProvider } from '@psui/react-video';
 
 function MultiplePlayersApp() {
   return (
