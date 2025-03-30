@@ -1,8 +1,9 @@
 import './react-video.css'
 import { VideoPlayer } from './components/VideoPlayer'
 import type { VideoPlayerProps } from './components/VideoPlayer/types'
+import { ReactVideoProvider } from './context/VideoContext'
 
-export { VideoPlayer }
+export { VideoPlayer, ReactVideoProvider }
 export type { VideoPlayerProps }
 
 // Export hooks

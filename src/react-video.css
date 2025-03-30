@@ -230,10 +230,18 @@ video {
   display: none;
 }
 .thumbnail-container {
-  @apply absolute bottom-[60px] w-28 h-24 transform -translate-x-1/2 overflow-hidden border-2 border-white rounded-2xl pointer-events-none z-10;
+  @apply absolute bottom-[60px] w-28 h-24 transform -translate-x-1/2 overflow-hidden border-2 border-white rounded-xl pointer-events-none z-10;
 }
 .thumbnail-img {
   @apply w-full h-full object-cover;
+}
+
+.thumbnail-loader {
+  @apply w-full h-full flex items-center justify-center bg-gray-600;
+}
+
+.thumbnail-loader-spinner {
+  @apply w-8 h-8 border-4 border-solid border-gray-300 border-t-blue-500 rounded-full animate-spin;
 }
 
 .ps-video-container.scrubbing .preview-img,

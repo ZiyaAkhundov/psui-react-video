@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import { VideoPlayerProps } from './types';
-import { VideoProvider } from '../../context/VideoContext';
+import { 
+  VideoProvider, 
+  RegistrationContext
+} from '../../context/VideoContext';
 import { useVideoState } from '../../hooks/useVideoState';
 import { useVideoControls } from '../../hooks/useVideoControls';
 import { useVideoTimeUpdate } from '../../hooks/useVideoTimeUpdate';
@@ -12,7 +15,7 @@ import '../../react-video.css';
 /**
  * VideoPlayer - A React component for playing and controlling video playback
  */
-const VideoPlayer = ({
+function VideoPlayer({
   src,
   paused = true,
   speed = 1,
@@ -22,13 +25,27 @@ const VideoPlayer = ({
   onTimeUpdate,
   onVolumeChange,
   className
-}: VideoPlayerProps): JSX.Element => {
+}: VideoPlayerProps): JSX.Element {
   // Initialize all video hooks
   const videoState = useVideoState(paused, speed);
   const videoControls = useVideoControls(videoState, onPlay, onPause);
   const timeUpdate = useVideoTimeUpdate(videoState, onTimeUpdate);
   const videoEvents = useVideoEvents(videoState, onEnded, onVolumeChange);
   const scrubbing = useVideoScrubbing(videoState, videoControls);
+
+  // Check if this VideoPlayer is inside a ReactVideoProvider
+  const registerWithProvider = useContext(RegistrationContext);
+  
+  // Track registration to avoid unnecessary updates
+  const registeredRef = useRef(false);
+
+  // Register with parent provider once when mounted
+  useEffect(() => {
+    if (registerWithProvider && !registeredRef.current) {
+      registerWithProvider(videoState, videoControls, timeUpdate, videoEvents, scrubbing);
+      registeredRef.current = true;
+    }
+  }, [registerWithProvider, videoState, videoControls, timeUpdate, videoEvents, scrubbing]);
 
   const {
     videoRef,
@@ -203,7 +220,13 @@ const VideoPlayer = ({
           <div className="ps-timeline-container" ref={timelineContainerRef} style={{ "--progress-position": videoState.percent } as React.CSSProperties}>
             {videoState.showThumbnail && (
               <div className="thumbnail-container" style={{ left: `${videoState.thumbnailPosition}px` }}>
-                <img className="thumbnail-img" alt="thumbnail" src={videoState.thumbnailSrc} />
+                {videoState.thumbnailSrc ? (
+                  <img className="thumbnail-img" alt="thumbnail" src={videoState.thumbnailSrc} />
+                ) : (
+                  <div className="thumbnail-loader">
+                    <div className="thumbnail-loader-spinner"></div>
+                  </div>
+                )}
               </div>
             )}
             <div className="ps-timeline">
@@ -280,6 +303,6 @@ const VideoPlayer = ({
       </div>
     </VideoProvider>
   );
-}; 
+}
 
 export { VideoPlayer }; 

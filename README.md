@@ -19,6 +19,7 @@ A modern, responsive React video player component with customizable controls, th
 - 🪝 **Custom Hooks**: Access player state and controls in your application
 - 🔌 **Callback Support**: Hooks for play, pause, end, and other events
 - 🛠️ **React 18/19 Compatible**: Works with the latest React versions
+- 🔄 **Context Provider**: Access video controls and state from anywhere in your app
 
 ## Installation
 
@@ -71,13 +72,33 @@ The `VideoPlayer` component accepts the following props:
 | `className` | `string` | `''` | Additional CSS class to apply to the container |
 | `children` | `ReactNode` | `undefined` | Children elements to render inside the player |
 
+## Context Provider
+
+The library includes a `ReactVideoProvider` that makes it easy to access the video's state and controls from anywhere in your application.
+
+```jsx
+import React from 'react';
+import { VideoPlayer, ReactVideoProvider } from 'react-video-master';
+
+function App() {
+  return (
+    <ReactVideoProvider>
+      <div style={{ height: "300px", width: "100%" }}>
+        <VideoPlayer src="https://example.com/video.mp4" />
+      </div>
+      <CustomControls />
+    </ReactVideoProvider>
+  );
+}
+```
+
 ## Hooks
 
 The library exports several hooks that allow you to control the video player programmatically:
 
-### useVideoState
+### useVideoStateContext
 
-Access the video player's state:
+Access the video player's state from anywhere inside a `ReactVideoProvider`:
 
 ```jsx
 import { useVideoStateContext } from 'react-video-master';
@@ -96,9 +117,9 @@ function VideoInfo() {
 }
 ```
 
-### useVideoControls
+### useVideoControlsContext
 
-Control the video player programmatically:
+Control the video player programmatically from anywhere inside a `ReactVideoProvider`:
 
 ```jsx
 import { useVideoControlsContext } from 'react-video-master';
@@ -118,7 +139,7 @@ function CustomControls() {
 }
 ```
 
-### Other Hooks
+### Other Context Hooks
 
 - `useTimeUpdate`: Access time update functionality
 - `useVideoEventsContext`: Access video event handlers
@@ -187,49 +208,125 @@ The component comes with a default styling that you can customize by overriding 
 
 ## Advanced Usage
 
-### Using with External Controls
+### Minimal Example with ReactVideoProvider
+
+This is the simplest way to use the context provider and hooks:
 
 ```jsx
 import React from 'react';
-import { VideoPlayer, useVideoControls } from 'react-video-master';
+import { VideoPlayer, ReactVideoProvider, useVideoControlsContext } from 'react-video-master';
 
-function App() {
-  return (
-    <div className="app">
-      <VideoPlayer src="https://example.com/video.mp4" />
-      <ExternalControls />
-    </div>
-  );
-}
-
-function ExternalControls() {
-  const { togglePlay, skip, toggleMute } = useVideoControls();
+// Simple custom control component
+function PlayPauseButton() {
+  // Access controls through context
+  const { togglePlay } = useVideoControlsContext();
   
   return (
-    <div className="external-controls">
-      <button onClick={togglePlay}>Play/Pause</button>
-      <button onClick={() => skip(-30)}>Rewind 30s</button>
-      <button onClick={() => skip(30)}>Forward 30s</button>
-      <button onClick={toggleMute}>Mute/Unmute</button>
+    <button onClick={togglePlay}>Play/Pause</button>
+  );
+}
+
+// Main component
+function App() {
+  return (
+    <ReactVideoProvider>
+      <div style={{ height: "300px", width: "100%" }}>
+        <VideoPlayer src="https://example.com/video.mp4" />
+      </div>
+      <PlayPauseButton />
+    </ReactVideoProvider>
+  );
+}
+```
+
+### Complete Example with State Management
+
+For more complex scenarios with state management:
+
+```jsx
+import React, { useState } from 'react';
+import { VideoPlayer, ReactVideoProvider, useVideoControlsContext, useVideoStateContext } from 'react-video-master';
+
+function CustomControls() {
+  // Access context through hooks
+  const controls = useVideoControlsContext();
+  const state = useVideoStateContext();
+
+  return (
+    <div className="custom-controls">
+      <button onClick={controls.togglePlay}>
+        {state.isPaused ? 'Play' : 'Pause'}
+      </button>
+      <button onClick={controls.toggleMute}>Mute/Unmute</button>
+      <button onClick={() => controls.skip(-10)}>Rewind 10s</button>
+      <button onClick={() => controls.skip(10)}>Forward 10s</button>
+      <button onClick={controls.changePlaybackSpeed}>Change Speed</button>
+      
+      {/* Progress bar */}
+      <div className="progress-bar">
+        <div className="progress" style={{ width: `${state.percent * 100}%` }} />
+      </div>
     </div>
   );
 }
 
-export default App;
+function VideoApp() {
+  const [isPaused, setIsPaused] = useState(true);
+
+  const handlePlay = () => setIsPaused(false);
+  const handlePause = () => setIsPaused(true);
+  const handleEnded = () => setIsPaused(true);
+
+  return (
+    <ReactVideoProvider>
+      <div style={{ height: "300px", width: "800px", position: "relative" }}>
+        <VideoPlayer
+          src="https://example.com/video.mp4"
+          paused={isPaused}
+          speed={1}
+          onPlay={handlePlay}
+          onPause={handlePause}
+          onEnded={handleEnded}
+          className="custom-player"
+        />
+      </div>
+      <CustomControls />
+    </ReactVideoProvider>
+  );
+}
 ```
 
 ### Using with Multiple Players
 
 ```jsx
 import React from 'react';
-import { VideoPlayer, VideoProvider } from 'react-video-master';
+import { VideoPlayer, ReactVideoProvider } from 'react-video-master';
 
 function MultiplePlayersApp() {
   return (
     <div className="multi-player-app">
-      {/* Each VideoPlayer creates its own context */}
-      <VideoPlayer src="https://example.com/video1.mp4" />
-      <VideoPlayer src="https://example.com/video2.mp4" />
+      {/* Each ReactVideoProvider creates its own context */}
+      <ReactVideoProvider>
+        <VideoPlayer src="https://example.com/video1.mp4" />
+        <PlayerControls id="player1" />
+      </ReactVideoProvider>
+      
+      <ReactVideoProvider>
+        <VideoPlayer src="https://example.com/video2.mp4" />
+        <PlayerControls id="player2" />
+      </ReactVideoProvider>
+    </div>
+  );
+}
+
+function PlayerControls({ id }) {
+  const controls = useVideoControlsContext();
+  
+  return (
+    <div className="player-controls">
+      <span>{id}</span>
+      <button onClick={controls.togglePlay}>Play/Pause</button>
+      <button onClick={controls.toggleMute}>Mute/Unmute</button>
     </div>
   );
 }
