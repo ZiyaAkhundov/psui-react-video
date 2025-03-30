@@ -1,8 +1,8 @@
-# React Video Player
+# ReactJS Video Player
 
 A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes.
 
-![React Video Player](./examples/video.png)
+![ReactJS Video Player](./examples/video.png)
 
 ## Features
 
@@ -23,18 +23,19 @@ A modern, responsive React video player component with customizable controls, th
 ## Installation
 
 ```bash
-npm install @psui/react-video
+npm install reactjs-video
 # or
-yarn add @psui/react-video
+yarn add reactjs-video
 # or
-pnpm add @psui/react-video
+pnpm add reactjs-video
 ```
 
 ## Quick Start
 
 ```jsx
 import React from 'react';
-import { VideoPlayer } from '@psui/react-video';
+import { VideoPlayer } from 'reactjs-video';
+import 'reactjs-video/style.css';
 
 function App() {
   return (

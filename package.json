@@ -1,33 +1,53 @@
 {
-  "name": "@psui/react-video",
-  "version": "1.0.1",
+  "name": "reactjs-video",
+  "version": "0.0.0",
   "description": "A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes",
-  "type": "module",
-  "files": [
-    "dist"
+  "keywords": [
+    "react",
+    "video",
+    "player",
+    "video",
+    "react-component",
+    "thumbnails",
+    "theater-mode",
+    "fullscreen",
+    "picture-in-picture"
   ],
-  "main": "./dist/react-video.umd.cjs",
-  "module": "./dist/react-video.js",
-  "types": "./dist/types/index.d.ts",
+  "homepage": "https://github.com/ZiyaAkhundov/reactjs-video#readme",
+  "bugs": {
+    "url": "https://github.com/ZiyaAkhundov/reactjs-video/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZiyaAkhundov/reactjs-video.git"
+  },
+  "license": "MIT",
+  "author": "Ziya Akhundov",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/react-video.js",
-      "require": "./dist/react-video.umd.cjs"
+      "import": "./dist/reactjs-video.js",
+      "require": "./dist/reactjs-video.umd.cjs"
     },
     "./style.css": "./dist/index.css"
   },
+  "main": "./dist/reactjs-video.umd.cjs",
+  "types": "./dist/types/index.d.ts",
+  "directories": {
+    "example": "examples"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vite build",
     "test": "vitest run",
     "prepare": "npm run build"
   },
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+  "dependencies": {
+    "path": "^0.12.7",
+    "vite-plugin-css-injected-by-js": "^3.5.2"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.15",
@@ -40,32 +60,15 @@
     "vite": "^6.2.0",
     "vite-plugin-dts": "^4.5.3"
   },
-  "dependencies": {
-    "path": "^0.12.7",
-    "vite-plugin-css-injected-by-js": "^3.5.2"
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
-  "keywords": [
-    "react",
-    "video",
-    "player",
-    "video",
-    "react-component",
-    "thumbnails",
-    "theater-mode",
-    "fullscreen",
-    "picture-in-picture"
-  ],
-  "author": "Ziya Akhundov",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ZiyaAkhundov/psui-react-video.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ZiyaAkhundov/psui-react-video/issues"
-  },
-  "homepage": "https://github.com/ZiyaAkhundov/psui-react-video#readme",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "module": "./dist/reactjs-video.js",
+  "sideEffects": [
+    "**/*.css"
+  ]
 }
