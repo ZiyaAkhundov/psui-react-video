@@ -1,0 +1,11 @@
+export { PlayIcon } from './PlayIcon';
+export { PauseIcon } from './PauseIcon';
+export { ReplayIcon } from './ReplayIcon';
+export { VolumeHighIcon } from './VolumeHighIcon';
+export { VolumeLowIcon } from './VolumeLowIcon';
+export { VolumeMutedIcon } from './VolumeMutedIcon';
+export { TallIcon } from './TallIcon';
+export { WideIcon } from './WideIcon';
+export { FullScreenOpenIcon } from './FullScreenOpenIcon';
+export { FullScreenCloseIcon } from './FullScreenCloseIcon';
+export { MiniPlayerIcon } from './MiniPlayerIcon'; 

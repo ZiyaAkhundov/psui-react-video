@@ -1,6 +1,7 @@
 {
   "name": "react-video",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes",
   "type": "module",
   "files": [
     "dist"
@@ -17,7 +18,9 @@
     "./style.css": "./dist/index.css"
   },
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "test": "vitest run",
+    "prepare": "npm run build"
   },
   "sideEffects": [
     "**/*.css"
@@ -40,5 +43,26 @@
   "dependencies": {
     "path": "^0.12.7",
     "vite-plugin-css-injected-by-js": "^3.5.2"
-  }
+  },
+  "keywords": [
+    "react",
+    "video",
+    "player",
+    "video-player",
+    "react-component",
+    "thumbnails",
+    "theater-mode",
+    "fullscreen",
+    "picture-in-picture"
+  ],
+  "author": "React Video Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZiyaAkhundov/react-video.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZiyaAkhundov/react-video/issues"
+  },
+  "homepage": "https://github.com/ZiyaAkhundov/react-video"
 }

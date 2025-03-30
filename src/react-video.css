@@ -1,5 +1,5 @@
 @import "tailwindcss";
-/* Custom styles converted with Tailwind’s @apply */
+/* Custom styles converted with Tailwind's @apply */
 
 .ps-video-container {
   @apply relative w-[90%] max-w-[1000px] flex justify-center mx-auto bg-black h-full;
@@ -48,10 +48,23 @@ video {
 }
 
 .ps-video-controls-container .controls button {
-  @apply bg-transparent border-0 text-inherit p-0 h-8 w-8 text-lg cursor-pointer opacity-85 transition-opacity duration-150 ease-in-out;
+  @apply bg-transparent border-0 text-inherit p-0 h-8 w-8 text-lg cursor-pointer opacity-85 transition-opacity duration-150 ease-in-out flex items-center justify-center;
 }
+
 .ps-video-controls-container .controls button:hover {
   @apply opacity-100;
+}
+
+.ps-video-controls-container .controls button svg {
+  @apply w-5 h-5 fill-white;
+}
+
+/* SVG Icon styles */
+.play-icon, .pause-icon, .replay-icon,
+.volume-high-icon, .volume-low-icon, .volume-muted-icon,
+.mini-player-icon, .tall-icon, .wide-icon,
+.fullscreen-open-icon, .fullscreen-close-icon {
+  @apply w-full h-full;
 }
 
 /* Icon visibility based on state */
@@ -62,33 +75,86 @@ video {
   @apply hidden;
 }
 
-.ps-video-container.theater .tall {
+/* Theater mode icon visibility */
+.theater-btn svg {
+  @apply block;
+}
+.ps-video-container.theater .tall-icon {
+  @apply block;
+}
+.ps-video-container.theater .wide-icon {
   @apply hidden;
 }
-.ps-video-container:not(.theater) .wide {
+.ps-video-container:not(.theater) .tall-icon {
   @apply hidden;
+}
+.ps-video-container:not(.theater) .wide-icon {
+  @apply block;
 }
 
-.ps-video-container.full-screen .open {
-  @apply hidden;
-}
-.ps-video-container:not(.full-screen) .close {
-  @apply hidden;
+/* Fullscreen icon visibility */
+.full-screen-btn .fullscreen-open-icon,
+.full-screen-btn .fullscreen-close-icon {
+  display: none;
 }
 
-.ps-volume-high-icon,
-.ps-volume-low-icon,
-.ps-volume-muted-icon {
-  @apply hidden;
+.full-screen-btn .fullscreen-open-icon {
+  display: block;
 }
-.ps-video-container[data-volume-level="high"] .ps-volume-high-icon {
-  @apply block;
+
+:fullscreen .full-screen-btn .fullscreen-open-icon {
+  display: none !important;
 }
-.ps-video-container[data-volume-level="low"] .ps-volume-low-icon {
-  @apply block;
+
+:fullscreen .full-screen-btn .fullscreen-close-icon {
+  display: block !important;
 }
-.ps-video-container[data-volume-level="muted"] .ps-volume-muted-icon {
-  @apply block;
+
+/* For Safari and older browsers that use vendor prefix */
+:-webkit-full-screen .full-screen-btn .fullscreen-open-icon {
+  display: none;
+}
+
+:-webkit-full-screen .full-screen-btn .fullscreen-close-icon {
+  display: block;
+}
+
+:-moz-full-screen .full-screen-btn .fullscreen-open-icon {
+  display: none;
+}
+
+:-moz-full-screen .full-screen-btn .fullscreen-close-icon {
+  display: block;
+}
+
+:-ms-fullscreen .full-screen-btn .fullscreen-open-icon {
+  display: none;
+}
+
+:-ms-fullscreen .full-screen-btn .fullscreen-close-icon {
+  display: block;
+}
+
+/* Volume icon visibility */
+.mute-btn svg {
+  display: none !important;
+}
+
+.ps-video-container[data-volume-level="high"] .mute-btn .volume-high-icon {
+  display: block !important;
+}
+
+.ps-video-container[data-volume-level="low"] .mute-btn .volume-low-icon {
+  display: block !important;
+}
+
+.ps-video-container[data-volume-level="muted"] .mute-btn .volume-muted-icon {
+  display: block !important;
+}
+
+/* Ensure volume low icon appears properly */
+.volume-low-icon path:nth-child(2) {
+  display: block;
 }
 
 .ps-volume-container {
@@ -190,37 +256,36 @@ video {
 
 /* Loader styles */
 .loader {
-  @apply hidden absolute top-1/2;
-  width: 4.35em;
-  transform-origin: center;
+  @apply hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12;
   animation: rotate4 2s linear infinite;
 }
+
 .loader circle {
   fill: none;
   stroke: hsl(214, 97%, 59%);
-  stroke-width: 2;
-  stroke-dasharray: 1,200;
+  stroke-width: 4;
+  stroke-dasharray: 80, 200;
   stroke-dashoffset: 0;
-  stroke-linecap: round;
   animation: dash4 1.5s ease-in-out infinite;
 }
 
 @keyframes rotate4 {
   100% {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
 @keyframes dash4 {
   0% {
-    stroke-dasharray: 1,200;
+    stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
   }
   50% {
-    stroke-dasharray: 90,200;
+    stroke-dasharray: 90, 200;
     stroke-dashoffset: -35px;
   }
   100% {
+    stroke-dasharray: 90, 200;
     stroke-dashoffset: -125px;
   }
 }
