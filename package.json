@@ -1,25 +1,25 @@
 {
-  "name": "reactjs-video",
-  "version": "0.0.0",
+  "name": "react-video-master",
+  "version": "1.0.1",
   "description": "A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes",
   "keywords": [
     "react",
     "video",
     "player",
-    "video",
+    "video-player",
     "react-component",
     "thumbnails",
     "theater-mode",
     "fullscreen",
     "picture-in-picture"
   ],
-  "homepage": "https://github.com/ZiyaAkhundov/reactjs-video#readme",
+  "homepage": "https://github.com/ZiyaAkhundov/react-video-master#readme",
   "bugs": {
-    "url": "https://github.com/ZiyaAkhundov/reactjs-video/issues"
+    "url": "https://github.com/ZiyaAkhundov/react-video-master/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ZiyaAkhundov/reactjs-video.git"
+    "url": "git+https://github.com/ZiyaAkhundov/react-video-master.git"
   },
   "license": "MIT",
   "author": "Ziya Akhundov",
@@ -27,12 +27,12 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/reactjs-video.js",
-      "require": "./dist/reactjs-video.umd.cjs"
+      "import": "./dist/react-video-master.js",
+      "require": "./dist/react-video-master.umd.cjs"
     },
     "./style.css": "./dist/index.css"
   },
-  "main": "./dist/reactjs-video.umd.cjs",
+  "main": "./dist/react-video-master.umd.cjs",
   "types": "./dist/types/index.d.ts",
   "directories": {
     "example": "examples"
@@ -67,7 +67,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "module": "./dist/reactjs-video.js",
+  "module": "./dist/react-video-master.js",
   "sideEffects": [
     "**/*.css"
   ]

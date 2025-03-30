@@ -20,8 +20,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'ReactJSVideo',
-      fileName: 'reactjs-video',
+      name: 'ReactVideoMaster',
+      fileName: 'react-video-master',
       formats: ['es', 'umd']
     },
     cssCodeSplit: false,

@@ -1,8 +1,8 @@
-# ReactJS Video Player
+# React Video Master
 
 A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes.
 
-![ReactJS Video Player](./examples/video.png)
+![React Video Master](https://via.placeholder.com/800x450/2a2a2a/ffffff?text=React+Video+Master+%7C+Complete+Video+Control+%7C+Thumbnails+%7C+Picture-in-Picture+%7C+Theater+Mode)
 
 ## Features
 
@@ -23,19 +23,20 @@ A modern, responsive React video player component with customizable controls, th
 ## Installation
 
 ```bash
-npm install reactjs-video
+npm install react-video-master
 # or
-yarn add reactjs-video
+yarn add react-video-master
 # or
-pnpm add reactjs-video
+pnpm add react-video-master
 ```
 
 ## Quick Start
 
 ```jsx
 import React from 'react';
-import { VideoPlayer } from 'reactjs-video';
-import 'reactjs-video/style.css';
+import { VideoPlayer } from 'react-video-master';
+// if needed
+import 'react-video-master/style.css';
 
 function App() {
   return (
