@@ -2,7 +2,7 @@
 
 A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes.
 
-![React Video Master](https://via.placeholder.com/800x450/2a2a2a/ffffff?text=React+Video+Master+%7C+Complete+Video+Control+%7C+Thumbnails+%7C+Picture-in-Picture+%7C+Theater+Mode)
+![React Video Master](./examples/video.png)
 
 ## Features
 
