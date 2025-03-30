@@ -80,7 +80,7 @@ The library exports several hooks that allow you to control the video player pro
 Access the video player's state:
 
 ```jsx
-import { useVideoStateContext } from '@psui/react-video';
+import { useVideoStateContext } from 'react-video-master';
 
 function VideoInfo() {
   const { isPaused, currentTime, totalTime, playbackSpeed } = useVideoStateContext();
@@ -101,7 +101,7 @@ function VideoInfo() {
 Control the video player programmatically:
 
 ```jsx
-import { useVideoControlsContext } from '@psui/react-video';
+import { useVideoControlsContext } from 'react-video-master';
 
 function CustomControls() {
   const { togglePlay, toggleMute, skip, changePlaybackSpeed } = useVideoControlsContext();
@@ -191,7 +191,7 @@ The component comes with a default styling that you can customize by overriding 
 
 ```jsx
 import React from 'react';
-import { VideoPlayer, useVideoControls } from '@psui/react-video';
+import { VideoPlayer, useVideoControls } from 'react-video-master';
 
 function App() {
   return (
@@ -222,7 +222,7 @@ export default App;
 
 ```jsx
 import React from 'react';
-import { VideoPlayer, VideoProvider } from '@psui/react-video';
+import { VideoPlayer, VideoProvider } from 'react-video-master';
 
 function MultiplePlayersApp() {
   return (
