@@ -236,7 +236,7 @@ function VideoPlayer({
           
           <div className="controls">
             <button className="play-pause-btn" onClick={videoControls.togglePlay}>
-              {videoState.isPaused ? <Icons.PlayIcon /> : videoState.isEnded ? <Icons.ReplayIcon /> : <Icons.PauseIcon />}
+              {isEnded ? <Icons.ReplayIcon /> : isPaused ? <Icons.PlayIcon /> : <Icons.PauseIcon />}
             </button>
             
             <div className="ps-volume-container">
