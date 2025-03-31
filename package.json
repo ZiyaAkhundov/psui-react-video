@@ -1,6 +1,6 @@
 {
   "name": "react-video-master",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A modern, responsive React video player component with customizable controls, thumbnail previews, and multiple viewing modes",
   "keywords": [
     "react",
